@@ -1,0 +1,27 @@
+store:
+  id: store-abc
+  domain: store-abc.localhost
+
+wordpress:
+  image: bitnami/wordpress:latest
+  replicas: 1
+
+mysql:
+  image: mysql:8.0
+  storageSize: 5Gi
+
+resources:
+  wordpress:
+    requests:
+      cpu: "100m"
+      memory: "256Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
+  mysql:
+    requests:
+      cpu: "100m"
+      memory: "256Mi"
+    limits:
+      cpu: "500m"
+      memory: "512Mi"

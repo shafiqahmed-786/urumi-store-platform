@@ -1,0 +1,23 @@
+# Node
+node_modules/
+npm-debug.log
+
+# Environment
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Kubernetes local
+*.kubeconfig
+
+# SQLite (if local DB)
+*.sqlite
+*.db
+
+# Docker
+Dockerfile.local

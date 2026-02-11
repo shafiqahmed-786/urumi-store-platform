@@ -1,0 +1,28 @@
+store:
+  domain: localhost
+
+ingress:
+  enabled: true
+  className: nginx
+  tls:
+    enabled: false
+
+wordpress:
+  replicaCount: 1
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+
+mysql:
+  storage: 1Gi
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi

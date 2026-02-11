@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress
+spec:
+  replicas: {{ .Values.wordpress.replicas }}
+  selector:
+    matchLabels:
+      app: wordpress
+  template:
+    metadata:
+      labels:
+        app: wordpress
+    spec:
+      containers:
+        - name: wordpress
+          image: {{ .Values.wordpress.image }}
+          env:
+            - name: WORDPRESS_DATABASE_HOST
+              value: mysql
+            - name: WORDPRESS_DATABASE_NAME
+              value: wordpress
+            - name: WORDPRESS_DATABASE_USER
+              value: wordpress
+            - name: WORDPRESS_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: mysql-password
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /wp-login.php
+              port: 8080
+            initialDelaySeconds: 30
+          livenessProbe:
+            httpGet:
+              path: /wp-login.php
+              port: 8080
+            initialDelaySeconds: 60
+          resources:
+            {{- toYaml .Values.resources.wordpress | nindent 12 }}
